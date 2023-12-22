@@ -1,0 +1,17 @@
+---
+import { endpointFetch } from "../functions/endpoint"
+
+const runtime = Astro.locals.runtime;
+const endpoint = endpointFetch( runtime.env.ENVIRONMENT )
+
+// NETWORK CALL TO GET DATA
+const network_data = await fetch( endpoint + "/home" )
+const data_json = await network_data.json()
+
+// IMPORT ASTRO COMPONENTS
+import Layout from "../layouts/Layout.astro"
+import HeaderBanner from "../components/common/HeaderBanner.astro"
+---
+<Layout>
+	<HeaderBanner />
+</Layout>
