@@ -1,17 +1,32 @@
 ---
 import { endpointFetch } from "../functions/endpoint"
 
-const runtime = Astro.locals.runtime;
-const endpoint = endpointFetch( runtime.env.ENVIRONMENT )
+// const runtime = Astro.locals.runtime;
+// const endpoint = endpointFetch( runtime.env.ENVIRONMENT )
 
-// NETWORK CALL TO GET DATA
-const network_data = await fetch( endpoint + "/home" )
-const data_json = await network_data.json()
+// // NETWORK CALL TO GET DATA
+// const network_data = await fetch( endpoint + "/home" )
+// const data_json = await network_data.json()
 
 // IMPORT ASTRO COMPONENTS
 import Layout from "../layouts/Layout.astro"
 import HeaderBanner from "../components/common/HeaderBanner.astro"
+import Header from "../components/header/Header"
+
+// IMPORT ASTRO ATOMS
+import Video from "../atoms/Video.astro"
+
+// IMPORT CONSTANTS
+import { CDN_LINK } from "../constants/cdn"
 ---
 <Layout>
 	<HeaderBanner />
+	<section class="h-screen max-h-screen relative">
+		<Header client:load />
+		<div class="h-96 md:h-full bg-zinc-200">
+			<Video>
+				<source src={ CDN_LINK + "eteam.mp4" } type="video/mp4"/>
+			</Video>
+		</div>
+	</section>
 </Layout>
